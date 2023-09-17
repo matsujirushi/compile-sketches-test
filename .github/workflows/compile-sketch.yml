@@ -1,0 +1,24 @@
+name: Compile Sketch
+
+on:
+  - workflow_dispatch
+
+jobs:
+  compile-sketch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile sketch
+        uses: arduino/compile-sketches@v1
+        with:
+          platforms: |
+            - name: adafruit:nrf52
+              source-url: https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+          fqbn: adafruit:nrf52:feather52840
+          sketch-paths: |
+            - ./examples/Blink/
+          libraries: |
+            -
